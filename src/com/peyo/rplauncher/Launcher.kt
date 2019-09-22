@@ -2,6 +2,7 @@ package com.peyo.rplauncher
 
 import android.app.Activity
 import android.os.Bundle
+import android.provider.Settings
 import java.util.ArrayList
 
 class Launcher : Activity(), LauncherModel.Callbacks {
@@ -23,5 +24,8 @@ class Launcher : Activity(), LauncherModel.Callbacks {
 
     override fun bindAllApplications(apps: ArrayList<AppInfo>) {
         mFragment.updateApps(apps)
+
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.TV_USER_SETUP_COMPLETE, 1)	
     }
 }
