@@ -7,6 +7,15 @@ import java.util.ArrayList
 class LauncherModel(private val mContext: Context) {
     private val mAppList: ArrayList<AppInfo> = ArrayList()
 
+    private val allowedApps = listOf(
+        // "com.example.android.camera2.basic",  // Camera
+        "com.astro.timertest",
+        "com.android.calendar", // Calendar
+        "com.android.deskclock", // Clock
+        // "com.android.gallery3d", // Gallery
+        "com.perracolabs.pixtica"  // pixtica camera
+    )
+
     suspend fun getAppList(): ArrayList<AppInfo> {
         return mAppList
     }
@@ -14,26 +23,17 @@ class LauncherModel(private val mContext: Context) {
     suspend fun loadAppList() {
         mAppList.clear()
         val pm = mContext.packageManager
-        var rInfos = pm.queryIntentActivities(
-                Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
-        for (ri in rInfos) {
-            val ai = AppInfo(mContext, ri.activityInfo)
-            addToAppList(ai)
-        }
 
-        rInfos = pm.queryIntentActivities(
-                Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LEANBACK_LAUNCHER), 0)
+        // Retrieve all launcher apps
+        val rInfos = pm.queryIntentActivities(
+            Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0
+        )
+        
+        // Filter apps based on the whitelist
         for (ri in rInfos) {
             val ai = AppInfo(mContext, ri.activityInfo)
-            addToAppList(ai)
-        }
-
-        rInfos = pm.queryIntentActivities(
-                Intent(Intent.ACTION_MAIN).addCategory(CATEGORY_LEANBACK_SETTINGS), 0)
-        for (ri in rInfos) {
-            val ai = AppInfo(mContext, ri.activityInfo)
-            if (!ai.componentName.className.contains("NetworkActivity")) {
-                mAppList.add(ai)
+            if (ai.componentName.packageName in allowedApps) {
+                addToAppList(ai)
             }
         }
     }
