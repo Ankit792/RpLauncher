@@ -9,3 +9,4 @@ RpLauncher
 
 
   And give the app privlege access in android_build/frameworks/base/data/etc/Android.bp
+  (https://stackoverflow.com/questions/72377380/change-launcher-in-aosp-11)
