@@ -1,0 +1,47 @@
+@@ -29,6 +29,46 @@ prebuilt_etc {
+     src: "framework-sysconfig.xml",
+ }
+ 
++prebuilt_etc {
++    name: "privapp_whitelist_com.arpi.rplauncher",
++    system_ext_specific: true,
++    sub_dir: "permissions",
++    src: "com.arpi.rplauncher.xml",
++    filename_from_src: true,
++}
++
++prebuilt_etc {
++    name: "privapp_whitelist_com.mozcelikors.eap",
++    system_ext_specific: true,
++    sub_dir: "permissions",
++    src: "com.mozcelikors.eap.xml",
++    filename_from_src: true,
++}
++
++prebuilt_etc {
++    name: "privapp_whitelist_com.kiloo.subwaysurf",
++    system_ext_specific: true,
++    sub_dir: "permissions",
++    src: "com.kiloo.subwaysurf.xml",
++    filename_from_src: true,
++}
++
++prebuilt_etc {
++    name: "privapp_whitelist_com.palahsu.ttt",
++    system_ext_specific: true,
++    sub_dir: "permissions",
++    src: "com.palahsu.ttt.xml",
++    filename_from_src: true,
++}
++
++prebuilt_etc {
++    name: "privapp_whitelist_app.olauncher",
++    system_ext_specific: true,
++    sub_dir: "permissions",
++    src: "app.olauncher.xml",
++    filename_from_src: true,
++}
++
+ prebuilt_etc {
+     name: "preinstalled-packages-platform.xml",
+     sub_dir: "sysconfig",
